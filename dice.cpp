@@ -1,5 +1,10 @@
 #include "dice.h"
 #include <map>
+dice::dice()
+{
+	N = 0;
+	vec = {};
+}
 dice::dice(int n, std::vector<double> v)
 {
 	this->N = n;
@@ -25,4 +30,12 @@ std::vector<double> dice::getProbabilities()
 	return v;
 }
 
-
+std::istream& operator>>(std::istream& is, dice& d)
+{
+	std::cout << "Enter number of faces" << std::endl;
+	int n;
+	is >> n;
+	dice d_temp(n);
+	d = d_temp;
+	return is;
+}
