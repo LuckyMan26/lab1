@@ -12,10 +12,11 @@ using namespace std;
 
 int main()
 {
-	cout << "Hello";
 	DiceSet s(3);
-	
-	s.getSumProbability();
+	DiceSet s1(2);
 	cout << s;
+	cout << endl;
+	cout << s1;
+	cout << (s < s1) << endl;
 }
 

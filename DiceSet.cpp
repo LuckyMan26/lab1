@@ -1,6 +1,6 @@
 #include "DiceSet.h"
 
-void DiceSet::find_possible_sums(std::vector<dice>& v, std::map<int, double>& m)
+void DiceSet::find_possible_sums(std::vector<dice> v, std::map<int, double>& m)
 {
 	
 		if (v.size() == 0) {
@@ -47,13 +47,15 @@ DiceSet::DiceSet(int s)
         v.push_back(d);
     }
     this->size = s;
-	
+	this->getSumProbability();
+
 }
 
 DiceSet::DiceSet(std::vector<dice> vec)
 {
     v = vec;
     this->size = vec.size();
+	this->getSumProbability();
 }
 
 std::vector<dice> DiceSet::getSet()
@@ -71,6 +73,21 @@ void DiceSet::getSumProbability()
 	
 	find_possible_sums(v, sumProbability);
 	
+}
+
+bool DiceSet::operator<(DiceSet& s)
+{
+	double counter1, counter2;
+	counter1 = 0;
+	counter2 = 0;
+	for (auto it = this->sumProbability.begin(); it != this->sumProbability.end(); ++it) {
+		counter1 += (it->first) * (it->second);
+		
+		}
+	for (auto it1 = s.sumProbability.begin(); it1 != s.sumProbability.end(); ++it1) {
+		counter2 += (it1->first) * (it1->second);
+	}
+	return counter1<counter2;
 }
 
 std::ostream& operator<<(std::ostream& os, DiceSet& s)
