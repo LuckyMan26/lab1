@@ -28,11 +28,11 @@ public:
 	friend std::ostream& operator << (std::ostream& os, Graph& graph) {
 		for (int i = 0; i < graph.vertices.size(); i++) {
 			Node<T>* temp = graph.vertices[i];
-			temp = temp->getNext();
+			temp = temp->next;
 			os << i << ": ";
 			while (temp) {
 				os << temp->getData() <<" ";
-				temp = temp->getNext();
+				temp = temp->next;
 			}
 			os << std::endl;
 			
@@ -40,25 +40,48 @@ public:
 		return os;
 	}
 	void delete_edge(int index_beg, int index_end) {
-		Node<T>* temp = vertices[index_beg];
-		Node<T>* temp2 = vertices[index_beg];
-		Node<T>* tmp = vertices[index_end];
-		while (temp) {
-			if (temp->getNext()->getData() == tmp->getData()) {
-				std::cout << temp->getData()<<std::endl;
+		Node<T>* beg = vertices[index_beg];
+		Node<T>* endd = vertices[index_end];
+		T data = vertices[index_end]->getData();
+		T d = vertices[index_beg]->getData();
+		Node<T>* begg = new Node<T>(vertices[index_beg]);
+		Node<T>* prev=new Node<T>(nullptr);
+
+		while (beg) {
+			if (beg->getData() == data) {
+				if (beg->next) {
+					prev->next = beg->next;
+					delete beg;
+					break;
+				}
+				else {
+					prev ->next = nullptr;
+					delete beg;
+					break;
+
+				}
 				
-				delete temp->getNext();
-				break;
 			}
-			temp = temp->getNext();
+			prev = beg;
+			beg = beg->next;
+			
 		}
-		while (tmp) {
-			if (tmp->getData() == temp2->getData()) {
-				std::cout << tmp->getData() << std::endl;
-				delete tmp;
-				break;
+		while (endd) {
+			if (endd->getData() == d) {
+				if (endd->next) {
+					prev->next = endd->next;
+					delete endd;
+					break;
+				}
+				else {
+					prev->next = nullptr;
+					delete endd;
+					break;
+				}
+
 			}
-			tmp = tmp->getNext();
+			prev = endd;
+			endd = endd->next;
 		}
 	}
 	void delete_vertice(int index) {

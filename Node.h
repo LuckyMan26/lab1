@@ -6,10 +6,10 @@ class Node
 {
 private:
 	T data;
-	Node* next;
+	
 	
 public:
-	
+	Node* next;
 	Node(Node<T>* n=nullptr) {
 		this->next = n;
 	}
