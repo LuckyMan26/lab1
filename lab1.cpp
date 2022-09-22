@@ -9,6 +9,7 @@
 #include "Node.h"
 #include "Graph.h"
 #include "Algorrithm.h"
+#include "Tree.h"
 using namespace std;
 
 int main()
@@ -44,5 +45,12 @@ int main()
 	g1 = alg.Kruskal(g);
 	cout << "Kruskal: " << endl;
 	cout << g1 << endl;
+
+	Tree<int> tree;
+	tree.add(2);
+	tree.add(3);
+	tree.add(4);
+	tree.add(5);
+	tree.print();
 }
 

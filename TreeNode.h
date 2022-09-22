@@ -13,7 +13,7 @@ public:
 		this->parent = nullptr;
 		this->sons = nullptr;
 	}
-	TreeNode(T data, TreeNode<T> p = nullptr, vector<TreeNode<T>*> sons = {}) {
+	TreeNode(T data, TreeNode<T>* p = nullptr, vector<TreeNode<T>*> sons = {}) {
 		this->data = data;
 		this->parent = p;
 		this->sons = sons;
@@ -24,8 +24,11 @@ public:
 	TreeNode<T>* getParent() {
 		return parent;
 	}
-	TreeNode<T>* getData() {
+	T getData() {
 		return data;
+	}
+	void changeParent(TreeNode<T>* p) {
+		this->parent = p;
 	}
 };
 

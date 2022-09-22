@@ -5,7 +5,10 @@ class Tree
 {
 	TreeNode<T>* root;
 public:
-	void  print(TreeNode<T> node_to_print) {
+	Tree() {
+		root = nullptr;
+	}
+	void  print(TreeNode<T>* node_to_print=nullptr) {
 		if (!node_to_print) {
 			node_to_print = this->root;
 			if (!node_to_print) {
@@ -13,12 +16,13 @@ public:
 				return;
 			}
 		}
-		std::cout << node_to_print->data << "(";
-		TreeNode* current = node_to_print->first_child;
-		while (current) {
-			print(current);
-			current = current->next;
-			if (current) { std::cout << ", "; }
+		std::cout << node_to_print->getData() << "(";
+	
+		vector<TreeNode<T>*> vec = node_to_print->getSons();
+		for (int i = 0;i<vec.size();i++) {
+			this->print(vec[i]);
+			
+			if (vec[i]) { std::cout << ", "; }
 		}
 		std::cout << ")";
 		if (node_to_print == this->root) {
@@ -26,14 +30,15 @@ public:
 		}
 	}
 	void add_child_node(TreeNode<T>* parent, TreeNode<T>* child) {
-		child->parent = parent;
-		vector<TreeNode<T>*> vec=parent->getSons();
+		child->changeParent(parent);
+		vector<TreeNode<T>*>& vec=parent->getSons();
 		vec.push_back(child);
 	}
 	void add(T data, TreeNode<T>* parent=nullptr) {
-		TreeNode* new_node = new TreeNode(data);
+		TreeNode<T>* new_node = new TreeNode<T>(data,parent);
 		if (parent == nullptr) {
 			if (this->root) {
+				
 				add_child_node(root, new_node);
 			}
 			else {
@@ -44,7 +49,6 @@ public:
 			add_child_node(parent, new_node);
 		}
 
-		return new_node;
 	}
 	void addNode(TreeNode<T>* data, TreeNode<T>* parent = nullptr) {
 		
@@ -60,7 +64,6 @@ public:
 			add_child_node(parent, data);
 		}
 
-		return new_node;
 	}
 	void deleteNode(TreeNode<T>* node) {
 		if (node->getParent()) {
