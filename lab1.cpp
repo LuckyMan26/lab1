@@ -34,5 +34,8 @@ int main()
 	cout << g << endl;
 	g.deleteEdge(0, 1);
 	cout << g << endl;
+	g.deleteVertice(0);
+	cout << g << endl;
+
 }
 

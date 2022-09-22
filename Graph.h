@@ -52,11 +52,6 @@ public:
 		}
 		return os;
 	}
-	void deleteVerice(T source) {
-		for (int i = 0; i < vertices.size(); i++) {
-
-		}
-	}
 	void deleteEdge(T source, T dest) {
 		std::vector<Node<T>*> nodeSource;
 		std::vector<Node<T>*> nodeDest;
@@ -80,5 +75,23 @@ public:
 			}
 		}
 	}
+	void deleteVertice(T source) {
+		vector<Node<T>*> v;
+		vector<Edge<T>*> edge;
+		for (int i = 0; i < vertices.size(); i++) {
+			edge = vertices[i]->getEdge();
+			for (int j = 0; j < edge.size(); j++) {
+				if (edge[j]->getDest()->getData() == source) {
+					deleteEdge(vertices[i]->getData(), source);
+				}
+			}
+		}
+		for (int i = 0; i < vertices.size(); i++) {
+			if (vertices[i]->getData() == source) {
+				vertices.erase(vertices.begin() + i);
+			}
+		}
+	}
+
 };
 
