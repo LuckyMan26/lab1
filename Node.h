@@ -6,13 +6,12 @@ using namespace std;
 template <class T> class Edge;
 
 template<typename T>
-class Node
-{
+class Node {
 private:
 	T data;
 	int index;
 	std::vector<Edge<T>*> adjVec;
-	
+
 public:
 	Node(T dat) {
 		this->data = dat;
@@ -21,7 +20,7 @@ public:
 	void changeIndex(int id) {
 		this->index = id;
 	}
-	void addEdge(Node* dest,int weight=0) {
+	void addEdge(Node* dest, int weight = 0) {
 		Edge<T>* edge = new Edge<T>(this, dest, weight);
 		adjVec.push_back(edge);
 	}
@@ -33,7 +32,7 @@ public:
 	vector<Edge<T>*> getEdge() {
 		return this->adjVec;
 	}
-	
+
 	T getData() {
 		return this->data;
 	}
@@ -44,12 +43,23 @@ public:
 		vector<Edge<T>*> v = node->getEdge();
 		int index = node->getIndex();
 		T data = node->getData();
+		os << index << " " << data << ": ";
 		for (int i = 0; i < v.size(); i++) {
-			os << "("<< v[i]->getDest()->getIndex() << ") ";
+			os << "(" << v[i]->getDest()->getIndex() << "," << v[i]->getDest()->getData() << ") ";
 		}
 		os << std::endl;
 		return os;
 	}
+	
+	void deleteEdge(Node* dest) {
+		
+		for (int i = 0; i < adjVec.size(); i++) {
+			if (adjVec[i]->getDest() == dest) {
+				adjVec.erase(adjVec.begin() + i);
+			}
+		}
+	}
+	
 };
 template <typename T>
 class Edge {
@@ -65,7 +75,7 @@ public:
 	}
 	Edge(Node<T>* s=nullptr, Node<T>* d=nullptr, int w=0) {
 		this->source = s;
-		this->d = dest;
+		this->dest = d;
 		this->weight = w;
 	}
 

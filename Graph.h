@@ -14,25 +14,29 @@ public:
 	}
 	void addVertice(Node<T>* node) {
 		int index=getNumberOfVertices();
-		node.changeIndex(inedx + 1);
+		node->changeIndex(index + 1);
 		vertices.push_back(node);
-		cout << node->getData() << endl;
 	}
-	void addEdge(T& source,T& dest) {
+	void addEdge(T source,T dest) {
 		std::vector<Node<T>*> nodeSource;
 		std::vector<Node<T>*> nodeDest;
 
 		for (int i = 0; i < vertices.size(); i++) {
-			if (vertices[i].data == source) {
+			if (vertices[i]->getData() == source) {
 				nodeSource.push_back(vertices[i]);
 			}
-			if (vertices[i].data == dest) {
+			if (vertices[i]->getData() == dest) {
 				nodeDest.push_back(vertices[i]);
 			}
 		}
 		for (int i = 0; i < nodeSource.size(); i++) {
 			for (int j = 0; j < nodeDest.size(); j++) {
 				nodeSource[i]->addEdge(nodeDest[j]);
+			}
+		}
+		for (int i = 0; i < nodeDest.size(); i++) {
+			for (int j = 0; j < nodeSource.size(); j++) {
+				nodeDest[i]->addEdge(nodeSource[j]);
 			}
 		}
 	}
@@ -42,11 +46,39 @@ public:
 	
 	friend std::ostream& operator << (std::ostream& os, Graph<T>& g) {
 		vector<Node<T>*> vec=g.getVertice();
+	
 		for (int i = 0; i < vec.size(); i++) {
 			os << (vec[i]);
 		}
 		return os;
+	}
+	void deleteVerice(T source) {
+		for (int i = 0; i < vertices.size(); i++) {
 
+		}
+	}
+	void deleteEdge(T source, T dest) {
+		std::vector<Node<T>*> nodeSource;
+		std::vector<Node<T>*> nodeDest;
+
+		for (int i = 0; i < vertices.size(); i++) {
+			if (vertices[i]->getData() == source) {
+				nodeSource.push_back(vertices[i]);
+			}
+			if (vertices[i]->getData() == dest) {
+				nodeDest.push_back(vertices[i]);
+			}
+		}
+		for (int i = 0; i < nodeSource.size(); i++) {
+			for (int j = 0; j < nodeDest.size(); j++) {
+				nodeSource[i]->deleteEdge(nodeDest[j]);
+			}
+		}
+		for (int i = 0; i < nodeDest.size(); i++) {
+			for (int j = 0; j < nodeSource.size(); j++) {
+				nodeDest[i]->deleteEdge(nodeSource[j]);
+			}
+		}
 	}
 };
 

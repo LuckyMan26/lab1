@@ -26,5 +26,13 @@ int main()
 	g.addVertice(node4);
 	
 	cout << g << endl;
+
+	g.addEdge(0, 1);
+	g.addEdge(2, 3);
+	g.addEdge(1, 3);
+
+	cout << g << endl;
+	g.deleteEdge(0, 1);
+	cout << g << endl;
 }
 
