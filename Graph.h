@@ -1,102 +1,52 @@
 #pragma once
 #include "Node.h"
 #include <vector>
+using namespace std;
 template<typename T>
 class Graph
 {
 private:
 	std::vector<Node<T>*> vertices;
+	
 public:
-	Graph(std::vector<Node<T>*> v = {}) {
-		for (int i = 0; i < v.size(); i++) {
-			vertices.push_back(v[i]);
-		}
-		
+	int getNumberOfVertices() {
+		return vertices.size();
 	}
-	void add_vertice(Node<T>* node) {
+	void addVertice(Node<T>* node) {
+		int index=getNumberOfVertices();
+		node.changeIndex(inedx + 1);
 		vertices.push_back(node);
+		cout << node->getData() << endl;
 	}
-	void add_edge(int beg, int end) {
-		Node<T>* temp = vertices[beg];
-		Node<T>* temp1 = vertices[end];
-		Node<T>* tmp = new Node<T>(vertices[end]->getData(), nullptr);
-		T d = vertices[end]->getData();
-		temp->append(tmp);
-		Node<T>* tmp1 = new Node<T>(vertices[beg]->getData(), nullptr);
-		temp1->append(tmp1);
-	}
-	friend std::ostream& operator << (std::ostream& os, Graph& graph) {
-		for (int i = 0; i < graph.vertices.size(); i++) {
-			Node<T>* temp = graph.vertices[i];
-			temp = temp->next;
-			os << i << ": ";
-			while (temp) {
-				os << temp->getData() <<" ";
-				temp = temp->next;
-			}
-			os << std::endl;
-			
-		}
-		return os;
-	}
-	void delete_edge(int index_beg, int index_end) {
-		Node<T>* beg = vertices[index_beg];
-		Node<T>* endd = vertices[index_end];
-		T data = vertices[index_end]->getData();
-		T d = vertices[index_beg]->getData();
-		Node<T>* begg = new Node<T>(vertices[index_beg]);
-		Node<T>* prev=new Node<T>(nullptr);
+	void addEdge(T& source,T& dest) {
+		std::vector<Node<T>*> nodeSource;
+		std::vector<Node<T>*> nodeDest;
 
-		while (beg) {
-			if (beg->getData() == data) {
-				if (beg->next) {
-					prev->next = beg->next;
-					delete beg;
-					break;
-				}
-				else {
-					prev ->next = nullptr;
-					delete beg;
-					break;
-
-				}
-				
+		for (int i = 0; i < vertices.size(); i++) {
+			if (vertices[i].data == source) {
+				nodeSource.push_back(vertices[i]);
 			}
-			prev = beg;
-			beg = beg->next;
-			
+			if (vertices[i].data == dest) {
+				nodeDest.push_back(vertices[i]);
+			}
 		}
-		while (endd) {
-			if (endd->getData() == d) {
-				if (endd->next) {
-					prev->next = endd->next;
-					delete endd;
-					break;
-				}
-				else {
-					prev->next = nullptr;
-					delete endd;
-					break;
-				}
-
+		for (int i = 0; i < nodeSource.size(); i++) {
+			for (int j = 0; j < nodeDest.size(); j++) {
+				nodeSource[i]->addEdge(nodeDest[j]);
 			}
-			prev = endd;
-			endd = endd->next;
 		}
 	}
-	void delete_vertice(int index) {
-		Node* temp = this->vertices[index];
-		Node* tmp = this->vertices[index];
-		while (temp) {
-			for (int i = 0; i < this->vertices.size(); i++) {
-				if (this->vertices[i] == temp->data) {
-					this->delete_edge(i, index);
-					break;
-				}
-			}
-			temp = temp->next;
-		}
+	vector<Node<T>*> getVertice() {
+		return vertices;
 	}
 	
+	friend std::ostream& operator << (std::ostream& os, Graph<T>& g) {
+		vector<Node<T>*> vec=g.getVertice();
+		for (int i = 0; i < vec.size(); i++) {
+			os << (vec[i]);
+		}
+		return os;
+
+	}
 };
 
