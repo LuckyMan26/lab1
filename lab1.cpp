@@ -8,6 +8,7 @@
 #include "DiceSet.h"
 #include "Node.h"
 #include "Graph.h"
+#include "Algorrithm.h"
 using namespace std;
 
 int main()
@@ -32,10 +33,16 @@ int main()
 	g.addEdge(1, 3);
 
 	cout << g << endl;
-	g.deleteEdge(0, 1);
+	cout << g.isAcyclic() << endl;
+	g.addEdge(0, 3);
+	g.addEdge(4, 3);
+	g.addEdge(6, 3);
 	cout << g << endl;
-	g.deleteVertice(0);
-	cout << g << endl;
-
+	cout << g.isAcyclic() << endl;
+	Graph<int> g1;
+	Algorithm<int> alg;
+	g1 = alg.Kruskal(g);
+	cout << "Kruskal: " << endl;
+	cout << g1 << endl;
 }
 
