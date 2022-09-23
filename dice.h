@@ -14,5 +14,6 @@ public:
 	int get_N();
 	std::vector<double> getProbabilities();
 	friend std::istream& operator >> (std::istream& is, dice& d);
+	 
 };
 

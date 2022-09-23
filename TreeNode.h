@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include "Node.h"
 using namespace std;
 template <typename T>
 class TreeNode
@@ -18,6 +19,10 @@ public:
 		this->parent = p;
 		this->sons = sons;
 	}
+	TreeNode(Node<T>* node) {
+		vector<Edge<T>*> vec=node->getEdge();
+		
+	}
 	vector< TreeNode<T>*>& getSons() {
 		return sons;
 	}
@@ -29,6 +34,9 @@ public:
 	}
 	void changeParent(TreeNode<T>* p) {
 		this->parent = p;
+	}
+	void addSon(TreeNode<T>* s) {
+		sons.push_back(s);
 	}
 };
 

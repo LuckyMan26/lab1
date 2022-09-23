@@ -52,5 +52,15 @@ int main()
 	tree.add(4);
 	tree.add(5);
 	tree.print();
+
+	Tree<int> res;
+	vector<Node<int>*> n = g1.getVertice();
+	
+	vector<pair<int, bool>> visited;
+	for (int i = 0; i < n.size(); i++) {
+		visited.push_back({n[i]->getIndex(), false});
+	}
+	res.convertToTree(g1, res,visited);
+	res.print();
 }
 

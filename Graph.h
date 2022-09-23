@@ -35,6 +35,22 @@ private:
 	}
 	
 public:
+	int findParent(int x, int vis[], int root[]) {
+		if (vis[x])
+			return root[x];
+
+		vis[x] = 1;
+		root[x] = x;
+		vector<Node<T>*> v;
+		int tmp;
+		for (int i = 0; i < v.size(); i++) {
+			if (v[i]->getIndex() == x) {
+				tmp = i;
+			}
+		}
+		root[x] = findParent(v[tmp]->getIndex(), vis, root);
+		return root[x];
+	}
 	Graph() {
 		vertices = {};
 	}
@@ -53,7 +69,7 @@ public:
 		node->changeIndex(index);
 		vertices.push_back(node);
 	}
-	void addEdge(T source,T dest) {
+	void addEdge(T source,T dest,int weight=0) {
 		std::vector<Node<T>*> nodeSource;
 		std::vector<Node<T>*> nodeDest;
 		
@@ -79,7 +95,7 @@ public:
 		
 		for (int i = 0; i < nodeSource.size(); i++) {
 			for (int j = 0; j < nodeDest.size(); j++) {
-				nodeSource[i]->addEdge(nodeDest[j]);
+				nodeSource[i]->addEdge(nodeDest[j],weight);
 			}
 		}
 		for (int i = 0; i < nodeDest.size(); i++) {
