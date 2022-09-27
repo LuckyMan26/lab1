@@ -1,5 +1,7 @@
 #include "dice.h"
 #include <map>
+#include <chrono>
+#include <ctime>
 dice::dice()
 {
 	N = 0;
@@ -30,6 +32,8 @@ std::vector<double> dice::getProbabilities()
 	return v;
 }
 
+
+
 std::istream& operator>>(std::istream& is, dice& d)
 {
 	std::cout << "Enter number of faces" << std::endl;
@@ -38,4 +42,23 @@ std::istream& operator>>(std::istream& is, dice& d)
 	dice d_temp(n);
 	d = d_temp;
 	return is;
+}
+
+bool operator==( dice& d,  dice& d1)
+{
+	if (d.get_N() != d1.get_N()) {
+		return false;
+	}
+	else {
+		std::vector<double> v = d1.getProbabilities();
+		std::vector<double> v1 = d.getProbabilities();
+
+		for (int i = 0; i < v.size(); i++) {
+			if (v[i] != v1[i]) {
+				return false;
+			}
+
+		}
+	}
+	return true;;
 }

@@ -15,6 +15,7 @@ public:
 	std::vector<dice> getSet();
 	friend std::ostream& operator << (std::ostream & os, DiceSet & s);
 	bool operator < (DiceSet& s);
+	
 
 };
 

@@ -35,22 +35,7 @@ private:
 	}
 	
 public:
-	int findParent(int x, int vis[], int root[]) {
-		if (vis[x])
-			return root[x];
-
-		vis[x] = 1;
-		root[x] = x;
-		vector<Node<T>*> v;
-		int tmp;
-		for (int i = 0; i < v.size(); i++) {
-			if (v[i]->getIndex() == x) {
-				tmp = i;
-			}
-		}
-		root[x] = findParent(v[tmp]->getIndex(), vis, root);
-		return root[x];
-	}
+	
 	Graph() {
 		vertices = {};
 	}

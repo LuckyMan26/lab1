@@ -1,5 +1,7 @@
 ﻿// lab1.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include "doctest.h"
 
 #include <iostream>
 #include <map>
@@ -10,10 +12,12 @@
 #include "Graph.h"
 #include "Algorrithm.h"
 #include "Tree.h"
+#include <typeinfo>
 using namespace std;
 
 int main()
 {
+
 	Node<int>* node=new Node<int>(0);
 	Node<int>* node1= new Node<int>(1);
 	Node<int>* node2= new Node<int>(2);
