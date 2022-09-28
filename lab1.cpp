@@ -1,7 +1,5 @@
 ﻿// lab1.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "doctest.h"
+
 
 #include <iostream>
 #include <map>
@@ -13,12 +11,37 @@
 #include "Algorrithm.h"
 #include "Tree.h"
 #include <typeinfo>
+
 using namespace std;
 
-int main()
+int main(int argc,char** argv)
 {
+	std::vector<double>  v;
 
-	Node<int>* node=new Node<int>(0);
+	std::vector<double>  v1;
+
+	std::vector<double>  v2;
+	for (int i = 0; i < 5; i++) {
+		v.push_back(0.2);
+	}
+	dice d(5, v);
+	for (int i = 0; i < 2; i++) {
+		v1.push_back(0.5);
+	}
+	for (int i = 0; i < 4; i++) {
+		v2.push_back(0.25);
+	}
+	dice d1(2, v1);
+	dice d2(4, v2);
+	std::vector<dice> vec;
+	vec.push_back(d);
+	vec.push_back(d1);
+	DiceSet s1(vec);
+	vec.push_back(d2);
+	DiceSet s2(vec);
+	map<int, double> m{ {2,0.1},{3,0.2},{4,0.2},{5,0.2},{6,0.2},{7,0.1} };;
+	cout <<(s1<s2) << endl;
+	/*Node<int>* node = new Node<int>(0);
 	Node<int>* node1= new Node<int>(1);
 	Node<int>* node2= new Node<int>(2);
 	Node<int>* node3= new Node<int>(3);
@@ -65,6 +88,6 @@ int main()
 		visited.push_back({n[i]->getIndex(), false});
 	}
 	res.convertToTree(g1, res,visited);
-	res.print();
+	res.print();*/
 }
 

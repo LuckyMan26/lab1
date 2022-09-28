@@ -72,7 +72,6 @@ void DiceSet::getSumProbability()
 	std::vector<double> vec;
 	
 	find_possible_sums(v, sumProbability);
-	
 }
 
 bool DiceSet::operator<(DiceSet& s)
@@ -90,6 +89,11 @@ bool DiceSet::operator<(DiceSet& s)
 	return counter1<counter2;
 }
 
+std::map<int, double> DiceSet::getsumProbability()
+{
+	return sumProbability;
+}
+
 std::ostream& operator<<(std::ostream& os, DiceSet& s)
 {
 	for (auto it = s.sumProbability.begin(); it != s.sumProbability.end(); ++it) {
@@ -97,3 +101,4 @@ std::ostream& operator<<(std::ostream& os, DiceSet& s)
 	}
 	return os;
 }
+
