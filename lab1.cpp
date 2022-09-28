@@ -16,6 +16,7 @@ using namespace std;
 
 int main(int argc,char** argv)
 {
+	cout << "This is code example" << endl;
 	std::vector<double>  v;
 
 	std::vector<double>  v1;
@@ -41,7 +42,7 @@ int main(int argc,char** argv)
 	DiceSet s2(vec);
 	map<int, double> m{ {2,0.1},{3,0.2},{4,0.2},{5,0.2},{6,0.2},{7,0.1} };;
 	cout <<(s1<s2) << endl;
-	/*Node<int>* node = new Node<int>(0);
+	Node<int>* node = new Node<int>(0);
 	Node<int>* node1= new Node<int>(1);
 	Node<int>* node2= new Node<int>(2);
 	Node<int>* node3= new Node<int>(3);
@@ -88,6 +89,6 @@ int main(int argc,char** argv)
 		visited.push_back({n[i]->getIndex(), false});
 	}
 	res.convertToTree(g1, res,visited);
-	res.print();*/
+	res.print();
 }
 
