@@ -2,6 +2,13 @@
 #include "Graph.h"
 #include <algorithm>
 template<typename T>
+Node<T>* createNode(int id,T data) {
+    Node<T>* node = new Node<T>(data);
+
+    node->changeIndex(id);
+    return node;
+}
+template<typename T>
 bool isInVector(vector<Edge<T>*> v,Edge<T>* data) {
     for (int i = 0; i < v.size(); i++) {
         if ((v[i]->getDest() == data->getDest())&&(v[i]->getSource() == data->getSource())||((v[i]->getDest() == data->getSource()) && (v[i]->getSource() == data->getDest()))) {
@@ -38,14 +45,14 @@ public:
         }
         Graph<T>  graph;
         for (int i = 0; i < size; i++) {
-            graph.addVertice(v[i]);
+            graph.addVertice(createNode(v[i]->getIndex(),v[i]->getData()));
         }
         Edge<T> e;
         while (!res.empty()) {
-            graph.addEdge(res[0]->getSource(), res[0]->getDest(),res[0]->getWeight());
-           
+            graph.addEdge(res[0]->getSource()->getData(), res[0]->getDest()->getData(), res[0]->getWeight());
             if (!graph.isAcyclic()) {
                 graph.deleteByIndex(res[0]->getSource()->getIndex(), res[0]->getDest()->getIndex());
+
             }
             res.erase(res.begin());
         }

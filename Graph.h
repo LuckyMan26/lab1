@@ -35,6 +35,7 @@ private:
 	}
 	
 public:
+	
 	Graph() {
 		vertices = {};
 	}
@@ -53,7 +54,7 @@ public:
 		node->changeIndex(index);
 		vertices.push_back(node);
 	}
-	void addEdge(T source,T dest) {
+	void addEdge(T source,T dest,int weight=0) {
 		std::vector<Node<T>*> nodeSource;
 		std::vector<Node<T>*> nodeDest;
 		
@@ -79,7 +80,7 @@ public:
 		
 		for (int i = 0; i < nodeSource.size(); i++) {
 			for (int j = 0; j < nodeDest.size(); j++) {
-				nodeSource[i]->addEdge(nodeDest[j]);
+				nodeSource[i]->addEdge(nodeDest[j],weight);
 			}
 		}
 		for (int i = 0; i < nodeDest.size(); i++) {
